@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Wecome to Book Review</title>
+  <!--<link rel="stylesheet" href="stylesheet.css" type="text/css">-->
+  <style type="text/css">
+        *{
+           font-size: 18px; 
+        }
+        #top{
+            margin: 1px auto;
+            padding: 2px;
+            width: 95%; 
+            height: 50px;
+            display: block;
+            text-align: left;
+        }
+        #heading{
+            font-size: 30px;
+            width: 60%;
+        }
+        #sidebar{
+            text-align: right;
+            float: right;
+            width: 50%;
+        }
+        #first_area{
+            margin: 1px auto;
+            margin-left: 10px;
+            margin-right: 10px;
+            padding: 2px;
+            width: 80%; 
+            display: block;
+            text-align: left;
+        }
+        #last_area{
+            margin: 1px auto;
+            margin-left: 30px;
+            padding: 2px;
+            width: 80%; 
+            display: block;
+            text-align: left;
+        }
+        .tab{
+            font-size: 30px;
+        }
+        .section{
+            border-top: 3px solid black;
+        }
+        nav ul{height:300px; width:400px; border: 1px solid black;}
+        nav ul{overflow:hidden; overflow-y:scroll;}
+  </style>
+  
+  </head>
+  <body>
+        <div id = 'top'>
+            <p id = 'sidebar'> <a href = '/friends'>Home</a> | <a href = '/signout'>Log out</a> </p>
+        </div>
+        <div id = "first_area">
+            <p id = "heading">User Alias: {{user.alias}}</p>
+            <p>Name: {{user.first_name}} {{user.last_name}}</p>
+            <p>Email: {{user.email}}</p>
+        </div>
+        <div id = 'last_area'>       
+            <p class = 'tab'>Users friends: </p>
+            {% if friends != null %}
+            <table id = "table_id">
+                <tr class = "table_title">
+                    <th>Name</th>
+                    <th>Action</th>
+                </tr>
+                {% for f in friends %}
+                {% if forloop.counter0|divisibleby:2 %}
+                <tr class = "table_alt1">
+                    <td>{{f.friend2.alias}}</td>
+                    <td>
+                            <a href = "/users/{{f.friend2.id}}" >View Profile </a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr class = "table_alt2">
+                    <td>{{f.friend2.alias}}</td>
+                    <td>
+                            <a href = "/users/{{f.friend2.id}}" >View Profile </a>
+                    </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            {% else %}
+            <p>You have no friends to display</p>
+            {% endif %}
+        </div>
+    </form>
+  </body>
+</html>

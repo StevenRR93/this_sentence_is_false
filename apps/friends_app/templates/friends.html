@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Wecome to friends</title>
+  <!--<link rel="stylesheet" href="stylesheet.css" type="text/css">-->
+  <style type="text/css">
+        *{
+           font-size: 20px; 
+        }
+        #top{
+            margin: 1px auto;
+            padding: 2px;
+            width: 95%; 
+            height: 150px;
+            display: block;
+            text-align: left;
+        }
+        #heading{
+            font-size: 40px;
+            float: left;
+            width: 60%;
+        }
+        h1 heading{
+            size: 40px;
+        }
+        #sidebar{
+            text-align: right;
+            float: right;
+            width: 20%;
+        }
+        #area{
+            margin: 1px auto;
+            margin-left: 10px;
+            margin-right: 10px;
+            padding: 2px;
+            width: 80%; 
+            display: block;
+            text-align: left;
+        }
+        #table_id{
+            margin: 1px auto;
+            padding: 2px;
+            width: 600px;
+            display: block;
+            text-align: left;
+            align-self: auto;
+            background-color: #FFFFFF;
+            border: 2px solid black;
+        }
+        .table_title{  
+            margin: 0px;
+            padding: 0px; 
+            background-color: #4B859C;
+            border-bottom: 3px solid black;
+            border: 1px solid black;
+        }
+        .table_alt1{
+            margin: 0px;
+            padding: 0px; 
+            background-color:#90D2EC;
+            border: 1px solid black;
+        }
+        .table_alt2{
+            margin: 0px;
+            padding: 0px; 
+            background-color:#3FA6CC;
+            border: 1px solid black;
+        }
+        .tab{
+            font-size: 30px;
+        }
+        .section{
+            border-top: 3px solid black;
+        }
+        nav ul{height:300px; width:400px; border: 1px solid black;}
+        nav ul{overflow:hidden; overflow-y:scroll;}
+  </style>
+  
+  </head>
+  <body>
+        <div id = 'top'>
+            <h1 id = 'heading'> Hello {{request.session.alias}}, you are logged in!</h1><br>
+            <p id = 'sidebar'> <a href = '/signout'>Log out</a> </p>
+        </div>
+        <div id = "area">
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <p class = 'tab'>Here is a list of your friends: </p>
+            {% if myfriends != null %}
+            <table id = "table_id">
+                <tr class = "table_title">
+                    <th>Name</th>
+                    <th>Action</th>
+                </tr>
+                {% for f in myfriends %}
+                {% if forloop.counter0|divisibleby:2 %}
+                <tr class = "table_alt1">
+                    <td>{{f.friend2.alias}}</td>
+                    <td>
+                            <a href = "users/{{f.friend2.id}}" >View Profile </a> | <a href = "destroy/{{f.friend2.id}}" >Remove friend</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr class = "table_alt2">
+                    <td>{{f.friend2.alias}}</td>
+                    <td>
+                            <a href = "users/{{f.friend2.id}}" >View Profile </a> | <a href = "destroy/{{f.friend2.id}}" >Remove friend</a>
+                    </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </table>
+            {% else %}
+            <p>You have no friends to display</p>
+            {% endif %}
+            <p class = 'tab'>Other users not on your friends list </p>
+            {% if other_users != null %}
+            <table id = "table_id">
+                <tr class = "table_title">
+                    <th>Name</th>
+                    <th>Action</th>
+                </tr>
+                {% for user in other_users %}
+                {% if forloop.counter0|divisibleby:2 %}
+                <tr class = "table_alt1">
+                    <td>
+                        <a href = "users/{{user.id}}" >{{user.alias}} </a>
+                    </td>
+                    <td>
+                        <a href = "add/{{user.id}}" >Add friend</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr class = "table_alt2">
+                    <td>
+                        <a href = "users/{{user.id}}" >{{user.alias}} </a>
+                    </td>
+                    <td>
+                        <a href = "add/{{user.id}}" >Add friend</a>
+                    </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </table>
+            {% else %}
+            <p>There are no other users to display</p>
+            {% endif %}
+    </form>
+  </body>
+</html>

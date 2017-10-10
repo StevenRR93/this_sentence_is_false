@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Success</title>
+  <!--<link rel="stylesheet" href="stylesheet.css" type="text/css">-->
+  <style type="text/css">
+        *{
+           font-size: 18px; 
+        }
+        #area{
+            margin: 1px auto;
+            padding: 2px;
+            width: 650px; 
+            display: block;
+            text-align: center;
+        }
+        #heading{
+          font-size: 40px;
+        }
+  </style>
+  
+  </head>
+  <body>
+      <div id = 'area'>
+        <h1 id = 'heading'>Success, {{user.first_name}}, you have registered successfully</h1>
+        <p>Click here to go back home and sign in:</p>
+        <a href = "/main">Go Back</a>
+      </div>
+  </body>
+</html>
